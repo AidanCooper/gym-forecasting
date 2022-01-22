@@ -3,6 +3,7 @@
 # -*- coding: utf-8 -*-
 import json
 import os
+from datetime import datetime
 from typing import Dict
 
 import requests
@@ -79,8 +80,22 @@ def get_gym_data(session: requests.Session, gym_id: str) -> Dict:
         print("Gym GET request failed.")
         return False
 
-    print(r.json()["currentBranch"])
     return r.json()["currentBranch"]
+
+
+def save_gym_data(data: Dict, file=ROOT_DIR / "data" / "interim" / "gym.csv"):
+    """Save retrieved gym data to the interim data folder"""
+    now = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    if data["capacity"] == "Closed":
+        cap = 0
+    elif data["capacity"] == "No Data Available":
+        cap = ""
+    else:
+        cap = data["capacity"][:-10]
+
+    with open(file, "a") as f:
+        f.write(f"\n{now},{data['name']},{cap}")
+    return
 
 
 if __name__ == "__main__":
@@ -94,3 +109,5 @@ if __name__ == "__main__":
     sess = start_gym_session(gym_u, gym_p)
     for name, id in gym_ids.items():
         data = get_gym_data(sess, id)
+        if data:
+            save_gym_data(data)
