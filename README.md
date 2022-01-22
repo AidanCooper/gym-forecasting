@@ -1,2 +1,4 @@
-# gym-forecasting
-Forecasting how busy my local gym will be
+Gym Forecasting
+==============================
+
+Forecasting how busy my local gym will be using Prophet
