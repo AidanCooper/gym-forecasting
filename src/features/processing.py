@@ -28,9 +28,9 @@ def copy_df(df: pd.DataFrame) -> pd.DataFrame:
 
 def round_minutes(df: pd.DataFrame, col: str = "time") -> pd.DataFrame:
     """Round datetime down to quarter hourly times."""
+    # checks
     if col not in df.columns:
         raise e.ColumnNotFoundException(col)
-
     if not is_datetime(df[col]):
         raise e.ColumnNotDatetimeException(col)
 
@@ -48,9 +48,9 @@ def round_minutes(df: pd.DataFrame, col: str = "time") -> pd.DataFrame:
 
 def filter_dayofweek(df: pd.DataFrame, day: int = 4, col: str = "time") -> pd.DataFrame:
     """Filter dataframe for a specified day of the week"""
+    # checks
     if col not in df.columns:
         raise e.ColumnNotFoundException(col)
-
     if not is_datetime(df[col]):
         raise e.ColumnNotDatetimeException(col)
 
@@ -63,9 +63,9 @@ def filter_date(
     df: pd.DataFrame, after_date: str = None, before_date: str = None, col: str = "time"
 ) -> pd.DataFrame:
     """Filter dataframe for a specifed data range"""
+    # checks
     if col not in df.columns:
         raise e.ColumnNotFoundException(col)
-
     if not is_datetime(df[col]):
         raise e.ColumnNotDatetimeException(col)
 

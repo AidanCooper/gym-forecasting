@@ -5,7 +5,7 @@ class GymLoginException(Exception):
         super().__init__()
 
     def __str__(self):
-        return f"'www.thegymgroup.com/login/' login process failed"
+        return f"'www.thegymgroup.com/login/' login process failed."
 
 
 class ColumnNotFoundException(Exception):
@@ -28,3 +28,25 @@ class ColumnNotDatetimeException(Exception):
 
     def __str__(self):
         return f"Column name '{self.column}' is not a datetime."
+
+
+class LimitException(Exception):
+    """Raised if specified plotting limit is invalid"""
+
+    def __init__(self, *args):
+        super().__init__()
+        self.limit = args[0]
+
+    def __str__(self):
+        return f"Plotting limit '{self.limit}' must be between 0.0-100.0 inclusive."
+
+
+class ConfidenceIntervalException(Exception):
+    """Raised if specified confidence interval is invalid"""
+
+    def __init__(self, *args):
+        super().__init__()
+        self.ci = args[0]
+
+    def __str__(self):
+        return f"Confidence interval '{self.ci}' must be between 0.0-1.0 exclusive."
