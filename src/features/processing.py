@@ -7,6 +7,18 @@ import math
 import pandas as pd
 import src.exceptions as e
 from pandas.api.types import is_datetime64_any_dtype as is_datetime
+from src.utils import get_project_root
+from typing import Union
+from pathlib import Path
+
+ROOT_DIR = get_project_root()
+
+
+def load_gym_data(
+    file: Union[str, Path] = ROOT_DIR / "data" / "processed" / "angel.csv"
+) -> pd.DataFrame:
+    """Load stored gym data correctly"""
+    return pd.read_csv(file, parse_dates=["time"], dayfirst=True)
 
 
 def copy_df(df: pd.DataFrame) -> pd.DataFrame:
