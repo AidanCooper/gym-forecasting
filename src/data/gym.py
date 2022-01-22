@@ -53,10 +53,44 @@ def start_gym_session(username: str, password: str) -> requests.Session:
     return session
 
 
+def get_gym_data(session: requests.Session, gym_id: str) -> Dict:
+    """Retrieve data for the requested gym
+
+    Parameters
+    ----------
+    session : requests.Session
+        A session opened by `src.data.gym.start_gym_session`, authenticated for the user
+        including CSRF token.
+    gym_id : str
+        ID for the gym of interest. Stored in `./data/raw/gyms.txt` or loaded by
+        `src.data.gym.get_gym_ids`.
+    Returns
+    -------
+    Dict
+        JSON data retrieved from TheGym API for the requested gym ID
+    """
+    url = (
+        f"https://www.thegymgroup.com/MemberGymBusynessBlock/GetBusynessForBranch/"
+        f"?branchId={gym_id}&configurationId=a3083ce3-5044-42ff-8b03-d234b2e56920"
+    )
+    r = session.get(url)
+
+    if r.status_code != 200:
+        print("Gym GET request failed.")
+        return False
+
+    print(r.json()["currentBranch"])
+    return r.json()["currentBranch"]
+
+
 if __name__ == "__main__":
+    # setup
     load_dotenv(find_dotenv())
     gym_ids = get_gym_ids()
     gym_u = os.getenv("gym_u")
     gym_p = os.getenv("gym_p")
 
+    # gym data
     sess = start_gym_session(gym_u, gym_p)
+    for name, id in gym_ids.items():
+        data = get_gym_data(sess, id)
