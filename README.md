@@ -20,7 +20,7 @@ from src.data.gym import start_gym_session, get_gym_ids, get_gym_data, save_gym_
 sess = start_gym_session(username="your_email@provider.com", password="your_PIN")
 ```
 
-A comprehensive list of 209 TheGym branchs ids, required or fetching data from TheGym's API can be loadead
+A comprehensive list of 209 TheGym branchs ids (required for fetching data from TheGym's API) can be loadead
 
 ```python
 # retrieve dictionary of branch:id pairs for 209 TheGym branches
