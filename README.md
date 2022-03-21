@@ -55,6 +55,6 @@ See the [README notebook](notebooks/20220130-AC-README_examples.ipynb) for `src.
   <img width="600" src="./figures/London_Angel-days_of_week.png" />
 </p>
 
-## Forecasting gym busyness
+## Forecasting gym busyness (WIP)
 
-TODO
+[Prophet - Simple example with weekdays and weekends/bank holidays.](notebooks/20220320-AC-Prophet_forecasting-weekdays_weekends_bankholidays.ipynb)
